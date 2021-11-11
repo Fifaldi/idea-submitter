@@ -1,0 +1,8 @@
+.p-inputtext {
+    &:hover {
+        border-color: $primaryColor !important;
+    }
+    &:focus {
+        border-color: $primaryColor !important;
+    }
+}

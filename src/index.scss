@@ -1,0 +1,24 @@
+@import 'primeflex/primeflex';
+@import 'primereact/resources/themes/saga-orange/theme';
+@import 'primereact/resources/primereact.min';
+@import 'primeicons/primeicons.css';
+@import './layout/variables';
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+        'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.right-margin-fix {
+    margin-right: 0;
+}
+.left-margin-fix {
+    margin-left: 0;
+}

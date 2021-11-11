@@ -1,0 +1,27 @@
+.toolbar-col {
+    padding: 0;
+}
+.sidemenu-col {
+    padding: 0;
+}
+.position-relative {
+    position: relative;
+}
+.toolbar-style {
+    background-color: rgb(56, 0, 0);
+    border: none;
+    border-radius: 0;
+}
+
+.logo-style {
+    width: 12rem;
+}
+
+.menu {
+    height: 100%;
+    width: 100%;
+}
+
+.content-body {
+    height: calc(100% - #{$headerHeight});
+}
