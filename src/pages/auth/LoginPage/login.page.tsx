@@ -52,7 +52,7 @@ const LoginPage = () => {
     return (
         <section id="auth" className="main-container">
             <div className={'login-form'}>
-                <h1 className="login-title mb-5">Login Form</h1>
+                <h1 className="login-title mb-5">Logowanie</h1>
                 <form onSubmit={formik.handleSubmit} className="p-fluid">
                     <div className="mb-5">
                         <span className="p-float-label p-input-icon-right">
@@ -86,13 +86,13 @@ const LoginPage = () => {
                             <label
                                 htmlFor="password"
                                 className={classNames({'p-error': isFormFieldValid('password')})}>
-                                Password*
+                                Hasło*
                             </label>
                         </span>
                         {getFormErrorMessage('password')}
                     </div>
 
-                    <Button type="submit" label="Login" className="mt-6" />
+                    <Button type="submit" label="Zaloguj" className="mt-6" />
                 </form>
             </div>
         </section>
