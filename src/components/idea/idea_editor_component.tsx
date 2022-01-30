@@ -10,7 +10,7 @@ interface IIdeaEditor {
     handleSave: (form: Omit<IIdeaDetails, 'author' | 'id'>) => void;
 }
 const IdeaEditor: React.FC<IIdeaEditor> = ({editedIdea, handleSave}) => {
-    const {values, setFieldValue, handleSubmit, errors, touched, setFieldTouched} = useFormik<
+    const {values, setFieldValue, handleSubmit, errors, touched} = useFormik<
         Omit<IIdeaDetails, 'author' | 'id'>
     >({
         initialValues: {
