@@ -1,9 +1,11 @@
 import React, {useEffect, useRef} from 'react';
 import {Switch, Route, Redirect, useHistory} from 'react-router-dom';
-import {HomePage} from '@pages/home';
+import {PanelPage} from '@pages/home';
 import {pageNotFound} from '@pages/common/not-found.page';
-import {MainRouting} from '@shared/enums';
+import {AuthRouting, PanelRouting} from '@shared/enums';
 import {NavigationService} from '@shared/services';
+import {PrivateRoute, ProtectedRoute} from '@core/hoc';
+import {AuthPage} from '@pages/auth';
 
 const MainRouter = () => {
     const history = useHistory();
@@ -16,11 +18,14 @@ const MainRouter = () => {
     return (
         <Switch>
             <Route exact path="/">
-                <Redirect to={MainRouting.HOME} />
+                <Redirect to={AuthRouting.ROOT} />
             </Route>
-            <Route path={MainRouting.HOME}>
-                <HomePage />
-            </Route>
+            <ProtectedRoute path={AuthRouting.ROOT}>
+                <AuthPage />
+            </ProtectedRoute>
+            <PrivateRoute path={PanelRouting.ROOT}>
+                <PanelPage />
+            </PrivateRoute>
 
             {pageNotFound()}
         </Switch>

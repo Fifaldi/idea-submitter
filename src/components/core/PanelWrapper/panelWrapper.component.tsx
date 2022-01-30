@@ -7,7 +7,7 @@ import {useDispatch} from 'react-redux';
 import {appVersion} from '../../../index';
 import {Tag} from 'primereact/tag';
 import logo from '@assets/logo.png';
-import {handleSucess} from '@store/actions';
+import {handleSucess, logout} from '@store/actions';
 import {MenuItem} from 'primereact/menuitem';
 
 interface IPanelWrapper {
@@ -31,14 +31,17 @@ const PanelWrapper = (props: IPanelWrapper) => {
                         }
                         right={
                             <Button
-                                onClick={() =>
+                                label="Wyloguj"
+                                iconPos="right"
+                                onClick={() => {
                                     dispatch(
                                         handleSucess({
                                             title: 'Sukces',
                                             message: 'Zostaleś wylogowany',
                                         }),
-                                    )
-                                }
+                                    );
+                                    dispatch(logout());
+                                }}
                                 className="p-button-rounded p-button-text"
                                 icon={'pi pi-sign-out'}
                             />
@@ -51,7 +54,7 @@ const PanelWrapper = (props: IPanelWrapper) => {
                 <div className="col-2 sidemenu-col">
                     <TieredMenu model={props.menuItems} className="menu" />
                 </div>
-                <div className="col-10 position-relative">{props.children}</div>
+                <div className="col-10 position-relative panel-wrapper">{props.children}</div>
             </div>
         </div>
     );

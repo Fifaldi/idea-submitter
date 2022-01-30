@@ -1,27 +1,46 @@
 .toolbar-col {
-    padding: 0;
+  padding: 0;
+
 }
+
 .sidemenu-col {
-    padding: 0;
+  padding: 0;
+
+  .p-tieredmenu.p-component.menu {
+    height: 100%;
+    width: 100%;
+
+    ul {
+      li.p-menuitem {
+        &:focus {
+          background-color: red;
+        }
+      }
+    }
+  }
 }
+
 .position-relative {
-    position: relative;
+  position: relative;
 }
+
 .toolbar-style {
-    background-color: rgb(56, 0, 0);
-    border: none;
-    border-radius: 0;
+  border: none;
+  border-radius: 0;
+  height: 6rem;
 }
 
 .logo-style {
-    width: 12rem;
-}
-
-.menu {
-    height: 100%;
-    width: 100%;
+  height: 6rem;
+  object-fit: contain;
 }
 
 .content-body {
-    height: calc(100% - #{$headerHeight});
+  height: calc(100% - #{$headerHeight});
+}
+
+.panel-wrapper {
+  overflow-y: scroll;
+  height: calc(100vh - 6rem);
+
 }

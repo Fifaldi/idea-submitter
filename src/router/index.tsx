@@ -12,3 +12,4 @@ export const ApplicationRouter = () => {
     );
 };
 export {default as PanelRouter} from './panel.router';
+export {default as AuthRouter} from './auth.router';

@@ -22,10 +22,6 @@ module.exports = {
                 resources: [
                     path.resolve(__dirname, './src/App.scss'),
                     path.resolve(__dirname, './src/layout/variables.scss'),
-                    path.resolve(__dirname, './src/layout/_button-overrides.scss'),
-                    path.resolve(__dirname, './src/layout/_tag-overrides.scss'),
-                    path.resolve(__dirname, './src/layout/_input-overrides.scss'),
-                    path.resolve(__dirname, './src/layout/_menu-overrides.scss'),
                 ],
             },
         },

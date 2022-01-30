@@ -1,18 +1,25 @@
-import {MainRouting, PanelRouting} from '@shared/enums';
+import {PanelRouting} from '@shared/enums';
 import {History} from 'history';
 
 export const menuDefault = (navigation: History) => {
     return [
         {
-            label: 'Dashboard',
-            icon: 'pi pi-fw pi-chart-bar',
-            command: () => navigation.push(`${MainRouting.HOME}${PanelRouting.DASHBOARD}`),
+            label: 'Przegląd pomysłów ',
+            icon: 'pi pi-fw pi-list',
+            command: () => navigation.push(`${PanelRouting.ROOT}${PanelRouting.IDEAS}`),
         },
         {
-            label: 'Dodaj pomysł',
-            icon: 'pi pi-fw pi-file',
+            label: 'Moje Pomysły',
+            icon: 'pi pi-fw pi-plus',
             command: () => {
-                navigation.push(`${MainRouting.HOME}${PanelRouting.ADD}`);
+                navigation.push(`${PanelRouting.ROOT}${PanelRouting.MY_IDEAS}`);
+            },
+        },
+        {
+            label: 'Statystyki',
+            icon: 'pi pi-fw pi-chart-bar',
+            command: () => {
+                navigation.push(`${PanelRouting.ROOT}${PanelRouting.STATISTICS}`);
             },
         },
     ];

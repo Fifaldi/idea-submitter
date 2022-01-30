@@ -1,17 +1,20 @@
 import {IAction} from '@shared/interfaces';
+import {AuthActions} from '@store/actions';
 
 export interface IAuthState {
     token: string;
-    refreshToken: string;
 }
 
 const initialState: IAuthState = {
     token: '',
-    refreshToken: '',
 };
 
 const AuthReducer = (state = initialState, action: IAction) => {
     switch (action.type) {
+        case AuthActions.LOGIN_SUCCESS:
+            return {...state, token: action.data.token};
+        case AuthActions.LOGOUT:
+            return initialState;
         default:
             return state;
     }

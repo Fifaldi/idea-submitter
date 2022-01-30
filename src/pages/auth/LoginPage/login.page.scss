@@ -1,0 +1,20 @@
+.main-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .login-form {
+    height: 50vh;
+    width: 30vw;
+    box-shadow: 8px 8px 24px -5px rgba(66, 68, 90, 1);
+    border-radius: 10px;
+    padding: 2rem;
+    background-color: var(--primary-color);
+
+    .login-title {
+      color: white;
+    }
+  }
+
+}
