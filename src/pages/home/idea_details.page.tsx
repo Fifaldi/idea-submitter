@@ -1,25 +1,21 @@
 import {useParams} from 'react-router-dom';
 import './homepage.styles.scss';
 import React from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {IAppState} from '@store/reducers';
-import {useEffect} from 'react';
-import {getIdeaDetails} from '@store/actions';
 
 const IdeaDetailsPage = () => {
-    const dispatch = useDispatch();
     const {id} = useParams<{id: string}>();
-
-    useEffect(() => {
-        dispatch(getIdeaDetails(id));
-    }, []);
-
-    const idea = useSelector((state: IAppState) => state.idea.currentIdea);
+    const {ideas} = useSelector((state: IAppState) => state.idea);
+    const idea = ideas.find((el) => el.id === id);
     if (!idea) {
         return null;
     }
     return (
         <main className="container">
+            <header>
+                <div>Szczegóły pomysłu</div>
+            </header>
             <div>
                 <h1>{idea.title}</h1>
                 <h2>{idea.author}</h2>

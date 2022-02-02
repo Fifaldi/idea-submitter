@@ -3,9 +3,13 @@ import React, {useEffect, useState} from 'react';
 import {Dictionary, keys, values} from 'lodash';
 import {Chart} from 'primereact/chart';
 import {CountUp} from 'use-count-up';
+import {IAppState} from '@store/reducers';
+import {useSelector} from 'react-redux';
 
 const StatisticsPage = () => {
     const [data, setData] = useState<Dictionary<number>>({});
+    const {ideas} = useSelector((state: IAppState) => state.idea);
+
     useEffect(() => {
         const tmpData: Dictionary<number> = {};
         [].forEach((x) => {
@@ -31,7 +35,7 @@ const StatisticsPage = () => {
             <header className="home-header">
                 <h1>Statystyki</h1>
             </header>
-            <CountUp isCounting end={10} duration={1} thousandsSeparator=",">
+            <CountUp isCounting end={ideas.length} duration={1} thousandsSeparator=",">
                 {(e: any) => (
                     <div className=" flex number-of-ideas-container  justify-content-center align-items-center mb-5 ">
                         <span className="number-of-ideas">

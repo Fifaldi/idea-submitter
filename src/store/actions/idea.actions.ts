@@ -34,10 +34,6 @@ export const createIdeaSuccess = (data: IIdea) => ({
     data,
 });
 
-export const getIdeaDetailsSuccess = (data: IIdea) => ({
-    type: IdeaActions.GET_IDEA_DETAILS_SUCCESS,
-    data,
-});
 export const editIdea = (id: string, editData: IIdeaEditor) => ({
     type: IdeaActions.EDIT_IDEA,
     data: {id, editData},

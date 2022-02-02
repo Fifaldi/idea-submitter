@@ -11,6 +11,7 @@ const IdeasPage = () => {
     const location = useLocation();
     const handleIdeaClick = (id: string) => history.push(`${location.pathname}/${id}`);
     const {ideas} = useSelector((state: IAppState) => state.idea);
+
     const [searchValue, setSearchValue] = useState('');
     if (!ideas.length) {
         return (

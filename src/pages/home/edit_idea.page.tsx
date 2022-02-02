@@ -5,21 +5,17 @@ import {IdeaEditor} from '@components/idea';
 import {IIdeaEditor} from '@shared/interfaces';
 import {useDispatch, useSelector} from 'react-redux';
 import {IAppState} from '@store/reducers';
-import {useEffect} from 'react';
-import {getIdeaDetails} from '@store/actions';
-import {editIdea} from '../../store/actions/idea.actions';
+import {editIdea} from '@store/actions';
 
 const EditIdeaPage = () => {
     const {id} = useParams<{id: string}>();
+    const {ideas} = useSelector((state: IAppState) => state.idea);
+    const currentIdea = ideas.find((el) => el.id === id);
     const dispatch = useDispatch();
-    const {currentIdea} = useSelector((state: IAppState) => state.idea);
+
     const handleSave = (form: IIdeaEditor) => {
         if (currentIdea) dispatch(editIdea(currentIdea.id, form));
     };
-
-    useEffect(() => {
-        dispatch(getIdeaDetails(id));
-    }, []);
 
     if (!currentIdea) {
         return null;

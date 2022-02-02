@@ -15,9 +15,9 @@ const IdeaReducer = (state = initialState, action: IAction) => {
     switch (action.type) {
         case IdeaActions.GET_IDEAS_SUCCESS:
             return {...state, ideas: action.data};
-        case IdeaActions.GET_IDEA_DETAILS_SUCCESS:
-        case IdeaActions.EDIT_IDEAS_SUCCESS:
-            return {...state, currentIdea: action.data};
+        case IdeaActions.GET_IDEA_DETAILS:
+            return {...state, currentIdea: state.ideas.find((idea) => idea.id === action.data)};
+
         default:
             return state;
     }

@@ -1,16 +1,16 @@
 import {IAction} from '@shared/interfaces';
 import {Observable, switchMap, catchError, of} from 'rxjs';
 import {ofType} from 'redux-observable';
-import {getIdeaDetailsSuccess, getIdeasSuccess, go, handleError, IdeaActions} from '@store/actions';
+import {getIdeasSuccess, go, handleError, IdeaActions} from '@store/actions';
 import {IdeaService} from '@shared/services';
 import {
     editIdeaSuccess,
     deleteIdeaSuccess,
     createIdeaSuccess,
     getIdeas,
-} from '../actions/idea.actions';
-import {PanelRouting} from '../../shared/enums/routing.enum';
-import {handleSucess} from '../actions/core.actions';
+    handleSucess,
+} from '@store/actions';
+import {PanelRouting} from '@shared/enums';
 const onGetIdeas$ = (actions$: Observable<IAction>) =>
     actions$.pipe(
         ofType(IdeaActions.GET_IDEAS),
@@ -21,34 +21,25 @@ const onGetIdeas$ = (actions$: Observable<IAction>) =>
             ),
         ),
     );
-// const onGetIdeaDetails$ = (actions$: Observable<IAction>) =>
-//     actions$.pipe(
-//         ofType(IdeaActions.GET_IDEA_DETAILS),
-//         switchMap((action) =>
-//             IdeaService.getIdeaDetails(action.data).pipe(
-//                 switchMap((result) => [getIdeaDetailsSuccess(result)]),
-//                 catchError((err) => [handleError(err)]),
-//             ),
-//         ),
-//     );
-// const onCreateIdea$ = (actions$: Observable<IAction>) =>
-//     actions$.pipe(
-//         ofType(IdeaActions.CREAT_IDEA),
-//         switchMap((action) =>
-//             IdeaService.createIdea(action.data).pipe(
-//                 switchMap((result) => [
-//                     createIdeaSuccess(result),
-//                     handleSucess({
-//                         title: 'Sukces',
-//                         message: 'Pomysł został dodany',
-//                     }),
-//                     getIdeas(),
-//                     go(`${PanelRouting.ROOT}${PanelRouting.MY_IDEAS}`),
-//                 ]),
-//                 catchError((err) => [handleError(err)]),
-//             ),
-//         ),
-//     );
+
+const onCreateIdea$ = (actions$: Observable<IAction>) =>
+    actions$.pipe(
+        ofType(IdeaActions.CREAT_IDEA),
+        switchMap((action) =>
+            IdeaService.createIdea(action.data).pipe(
+                switchMap((result) => [
+                    createIdeaSuccess(result),
+                    handleSucess({
+                        title: 'Sukces',
+                        message: 'Pomysł został dodany',
+                    }),
+                    getIdeas(),
+                    go(`${PanelRouting.ROOT}${PanelRouting.MY_IDEAS}`),
+                ]),
+                catchError((err) => [handleError(err)]),
+            ),
+        ),
+    );
 // const onEditIdea$ = (actions$: Observable<IAction>) =>
 //     actions$.pipe(
 //         ofType(IdeaActions.EDIT_IDEA),
@@ -84,4 +75,4 @@ const onGetIdeas$ = (actions$: Observable<IAction>) =>
 //             ),
 //         ),
 //     );
-export const ideas = [onGetIdeas$];
+export const ideas = [onGetIdeas$, onCreateIdea$];

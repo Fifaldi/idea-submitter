@@ -1,41 +1,40 @@
 import {API_ROUTES} from '@shared/constants';
 import ApiService from './api.service';
 import {IIdeaEditor, IIdea} from '@shared/interfaces';
-import {of} from 'rxjs';
-import {collection, getDocs} from 'firebase/firestore';
+import {from, of} from 'rxjs';
+import {addDoc, collection, getDocs, updateDoc} from 'firebase/firestore';
 import {database} from '@core/firebase.config';
 
 export default class IdeaService {
+    static readonly ideaCollection = collection(database, 'ideas');
     static getIdeas() {
-        const dupa = (async () => {
-            const ideaCollection = collection(database, 'ideas');
-            const data = await getDocs(ideaCollection);
-            return data.docs.map((doc) => ({...doc.data()}));
-        })();
-        console.log(dupa);
-        return of(dupa);
+        return from(
+            (async () => {
+                const data = await getDocs(this.ideaCollection);
+                return data.docs.map((doc) => ({...doc.data(), id: doc.id}));
+            })(),
+        );
     }
-    static getIdeaDetails(id: string) {
-        // return this.get<IIdeaDetails>(`${API_ROUTES.IDEAS.ROOT}/${id}`);
-        // const idea = mockIdeas.find((el) => el.id === id);
-        // if (idea) return of(idea);
-        // throw new Error('Nie ma takiego pomysłu');
-    }
+
     static createIdea(data: IIdeaEditor) {
-        // return this.post<Omit<IIdeaDetails, 'author' | 'id'>, IIdeaDetails>(
-        //     `${API_ROUTES.IDEAS.ROOT}`,
-        //     data,
-        // );
-        // return of(mockIdeas[1]);
+        async () => {
+            await addDoc(this.ideaCollection, {
+                title: data.title,
+                shortDescription: data.shortDescription,
+                description: data.description,
+            });
+        };
+        return of();
     }
     static editIdea(id: string, editData: IIdeaEditor) {
-        // return this.patch<Omit<IIdeaDetails, 'author' | 'id'>, IIdeaDetails>(
-        //     `${API_ROUTES.IDEAS.ROOT}/${id}`,
-        //     editData,
-        // );
-        // const idea = mockIdeas.find((el) => el.id === id);
-        // if (idea) return of(idea);
-        // throw new Error('Nie ma takiego pomysłu');
+        // async () => {
+        //     await updateDoc(this.ideaCollection, {
+        //         title: data.title,
+        //         shortDescription: data.shortDescription,
+        //         description: data.description,
+        //     });
+        // };
+        return of();
     }
     static deleteIdea(id: string) {
         // return this.delete(`${API_ROUTES.IDEAS.ROOT}/${id}`);
