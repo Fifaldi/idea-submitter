@@ -6,10 +6,14 @@ import {collection, getDocs} from 'firebase/firestore';
 import {database} from '@core/firebase.config';
 
 export default class IdeaService {
-    static async getIdeas() {
-        const ideaCollection = collection(database, 'ideas');
-        const data = await getDocs(ideaCollection);
-        return data.docs.map((doc) => ({...doc.data()}));
+    static getIdeas() {
+        const dupa = (async () => {
+            const ideaCollection = collection(database, 'ideas');
+            const data = await getDocs(ideaCollection);
+            return data.docs.map((doc) => ({...doc.data()}));
+        })();
+        console.log(dupa);
+        return of(dupa);
     }
     static getIdeaDetails(id: string) {
         // return this.get<IIdeaDetails>(`${API_ROUTES.IDEAS.ROOT}/${id}`);
