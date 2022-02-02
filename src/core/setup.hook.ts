@@ -8,6 +8,8 @@ export const useSetup = () => {
     const [initialized, setInitialized] = useState(false);
     const dispatch = useDispatch();
 
+    // Initialize Firebase
+
     useEffect(() => {
         Axios.interceptors.request.use(
             authHttpInterceptor.onFulfilled,

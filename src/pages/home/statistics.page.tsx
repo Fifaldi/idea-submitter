@@ -1,6 +1,5 @@
 import './homepage.styles.scss';
 import React, {useEffect, useState} from 'react';
-import {mockIdeas} from '../../shared/mocks/idea.mock';
 import {Dictionary, keys, values} from 'lodash';
 import {Chart} from 'primereact/chart';
 import {CountUp} from 'use-count-up';
@@ -9,8 +8,8 @@ const StatisticsPage = () => {
     const [data, setData] = useState<Dictionary<number>>({});
     useEffect(() => {
         const tmpData: Dictionary<number> = {};
-        mockIdeas.forEach((x) => {
-            tmpData[x.author] = (tmpData[x.author] || 0) + 1;
+        [].forEach((x) => {
+            tmpData[x] = (tmpData[x] || 0) + 1;
         });
         setData(tmpData);
     }, []);
@@ -32,7 +31,7 @@ const StatisticsPage = () => {
             <header className="home-header">
                 <h1>Statystyki</h1>
             </header>
-            <CountUp isCounting end={mockIdeas.length} duration={1} thousandsSeparator=",">
+            <CountUp isCounting end={10} duration={1} thousandsSeparator=",">
                 {(e: any) => (
                     <div className=" flex number-of-ideas-container  justify-content-center align-items-center mb-5 ">
                         <span className="number-of-ideas">

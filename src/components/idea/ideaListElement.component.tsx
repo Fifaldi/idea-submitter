@@ -1,4 +1,4 @@
-import {IIdeaDetails} from '@shared/interfaces';
+import {IIdea} from '@shared/interfaces';
 import {Menu} from 'primereact/menu';
 import React, {useRef} from 'react';
 import {Card} from 'primereact/card';
@@ -6,7 +6,7 @@ import './idea.style.scss';
 import {confirmDialog} from 'primereact/confirmdialog';
 
 interface IIdeaListElement {
-    idea: IIdeaDetails;
+    idea: IIdea;
     onPress: (id: string) => void;
     editable?: boolean;
     editIdea?: (id: string) => void;
@@ -58,7 +58,7 @@ const IdeaListElement: React.FC<IIdeaListElement> = ({
                     {idea.author === 'Jan Kowalski' && <i className="pi pi-user"></i>}
                 </div>
                 <div className="product-list-action">
-                    <p>{idea.summary}</p>
+                    <p>{idea.shortDescription}</p>
                     <h6 className="mb-2">{idea.author}</h6>
                 </div>
             </div>

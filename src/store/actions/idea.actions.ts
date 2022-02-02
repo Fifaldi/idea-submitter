@@ -1,4 +1,4 @@
-import {IIdeaDetails} from '@shared/interfaces';
+import {IIdea, IIdeaEditor} from '@shared/interfaces';
 
 export const IdeaActions = {
     GET_IDEAS: '[Idea] Get ideas',
@@ -17,7 +17,7 @@ export const getIdeas = () => ({
     type: IdeaActions.GET_IDEAS,
 });
 
-export const getIdeasSuccess = (data: IIdeaDetails[]) => ({
+export const getIdeasSuccess = (data: IIdea[]) => ({
     type: IdeaActions.GET_IDEAS_SUCCESS,
     data,
 });
@@ -25,24 +25,24 @@ export const getIdeaDetails = (data: string) => ({
     type: IdeaActions.GET_IDEA_DETAILS,
     data,
 });
-export const createIdea = (data: Omit<IIdeaDetails, 'author' | 'id'>) => ({
+export const createIdea = (data: IIdeaEditor) => ({
     type: IdeaActions.CREAT_IDEA,
     data,
 });
-export const createIdeaSuccess = (data: IIdeaDetails) => ({
+export const createIdeaSuccess = (data: IIdea) => ({
     type: IdeaActions.CREATE_IDEA_SUCCESS,
     data,
 });
 
-export const getIdeaDetailsSuccess = (data: IIdeaDetails) => ({
+export const getIdeaDetailsSuccess = (data: IIdea) => ({
     type: IdeaActions.GET_IDEA_DETAILS_SUCCESS,
     data,
 });
-export const editIdea = (id: string, editData: Omit<IIdeaDetails, 'author' | 'id'>) => ({
+export const editIdea = (id: string, editData: IIdeaEditor) => ({
     type: IdeaActions.EDIT_IDEA,
     data: {id, editData},
 });
-export const editIdeaSuccess = (data: IIdeaDetails) => ({
+export const editIdeaSuccess = (data: IIdea) => ({
     type: IdeaActions.EDIT_IDEAS_SUCCESS,
     data,
 });

@@ -2,7 +2,7 @@ import './homepage.styles.scss';
 import React from 'react';
 import {useParams} from 'react-router-dom';
 import {IdeaEditor} from '@components/idea';
-import {IIdeaDetails} from '@shared/interfaces';
+import {IIdeaEditor} from '@shared/interfaces';
 import {useDispatch, useSelector} from 'react-redux';
 import {IAppState} from '@store/reducers';
 import {useEffect} from 'react';
@@ -13,7 +13,7 @@ const EditIdeaPage = () => {
     const {id} = useParams<{id: string}>();
     const dispatch = useDispatch();
     const {currentIdea} = useSelector((state: IAppState) => state.idea);
-    const handleSave = (form: Omit<IIdeaDetails, 'author' | 'id'>) => {
+    const handleSave = (form: IIdeaEditor) => {
         if (currentIdea) dispatch(editIdea(currentIdea.id, form));
     };
 

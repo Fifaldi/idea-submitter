@@ -1,26 +1,24 @@
 import React from 'react';
 import {InputText} from 'primereact/inputtext';
 import {InputTextarea} from 'primereact/inputtextarea';
-import {IIdeaDetails} from '@shared/interfaces';
+import {IIdea, IIdeaEditor} from '@shared/interfaces';
 import {object, string} from 'yup';
 import {useFormik} from 'formik';
 import {Button} from 'primereact/button';
-interface IIdeaEditor {
-    editedIdea?: IIdeaDetails;
-    handleSave: (form: Omit<IIdeaDetails, 'author' | 'id'>) => void;
+interface IIdeaEditorPage {
+    editedIdea?: IIdea;
+    handleSave: (form: IIdeaEditor) => void;
 }
-const IdeaEditor: React.FC<IIdeaEditor> = ({editedIdea, handleSave}) => {
-    const {values, setFieldValue, handleSubmit, errors, touched} = useFormik<
-        Omit<IIdeaDetails, 'author' | 'id'>
-    >({
+const IdeaEditor: React.FC<IIdeaEditorPage> = ({editedIdea, handleSave}) => {
+    const {values, setFieldValue, handleSubmit, errors, touched} = useFormik<IIdeaEditor>({
         initialValues: {
             title: editedIdea?.title ?? '',
-            summary: editedIdea?.summary ?? '',
+            shortDescription: editedIdea?.shortDescription ?? '',
             description: editedIdea?.description ?? '',
         },
         validationSchema: object().shape({
             title: string().required('*Pole wymagane'),
-            summary: string().required('*Pole wymagane'),
+            shortDescription: string().required('*Pole wymagane'),
             description: string().required('*Pole wymagane'),
         }),
         onSubmit: (form) => handleSave(form),
@@ -48,15 +46,15 @@ const IdeaEditor: React.FC<IIdeaEditor> = ({editedIdea, handleSave}) => {
                     <InputText
                         className="bg-white text-primary"
                         id="inputtext"
-                        value={values.summary}
-                        onChange={(e) => setFieldValue('summary', e.target.value)}
+                        value={values.shortDescription}
+                        onChange={(e) => setFieldValue('shortDescription', e.target.value)}
                     />
                     <label htmlFor="inputtext" className="text-primary">
                         Krotkie podumowanie
                     </label>
                 </span>
-                {errors.summary && touched.summary && (
-                    <span className="text-pink-500">{errors.summary}</span>
+                {errors.shortDescription && touched.shortDescription && (
+                    <span className="text-pink-500">{errors.shortDescription}</span>
                 )}
             </div>
             <div className="my-6">

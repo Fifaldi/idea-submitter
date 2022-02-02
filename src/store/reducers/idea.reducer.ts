@@ -1,9 +1,9 @@
-import {IAction, IIdeaDetails} from '@shared/interfaces';
+import {IAction, IIdea} from '@shared/interfaces';
 import {IdeaActions} from '@store/actions';
 
 export interface IIdeaState {
-    ideas: IIdeaDetails[];
-    currentIdea: IIdeaDetails | null;
+    ideas: IIdea[];
+    currentIdea: IIdea | null;
 }
 
 const initialState: IIdeaState = {

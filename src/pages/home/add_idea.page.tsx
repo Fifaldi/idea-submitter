@@ -2,13 +2,13 @@ import './homepage.styles.scss';
 import React from 'react';
 
 import {IdeaEditor} from '@components/idea';
-import {IIdeaDetails} from '@shared/interfaces';
+import {IIdea, IIdeaEditor} from '@shared/interfaces';
 import {useDispatch} from 'react-redux';
-import {createIdea} from '../../store/actions/idea.actions';
+import {createIdea} from '@store/actions';
 
 const EditIdeaPage = () => {
     const dispatch = useDispatch();
-    const handleSave = (form: Omit<IIdeaDetails, 'author' | 'id'>) => dispatch(createIdea(form));
+    const handleSave = (form: IIdeaEditor) => dispatch(createIdea(form));
     return (
         <main className="container">
             <header className="home-header">
