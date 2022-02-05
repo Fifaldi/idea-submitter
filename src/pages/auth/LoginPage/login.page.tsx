@@ -35,7 +35,7 @@ const LoginPage = () => {
             return errors;
         },
         onSubmit: (data: ILoginFormData) => {
-            dispatch(loginAction({login: data.login, password: data.password}));
+            dispatch(loginAction({email: data.login, password: data.password}));
             formik.resetForm();
         },
     });

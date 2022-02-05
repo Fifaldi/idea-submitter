@@ -7,7 +7,7 @@ import {useDispatch} from 'react-redux';
 import {appVersion} from '../../../index';
 import {Tag} from 'primereact/tag';
 import logo from '@assets/logo.png';
-import {handleSucess, logout} from '@store/actions';
+import {logout} from '@store/actions';
 import {MenuItem} from 'primereact/menuitem';
 
 interface IPanelWrapper {
@@ -34,12 +34,6 @@ const PanelWrapper = (props: IPanelWrapper) => {
                                 label="Wyloguj"
                                 iconPos="right"
                                 onClick={() => {
-                                    dispatch(
-                                        handleSucess({
-                                            title: 'Sukces',
-                                            message: 'Zostaleś wylogowany',
-                                        }),
-                                    );
                                     dispatch(logout());
                                 }}
                                 className="p-button-rounded p-button-text"

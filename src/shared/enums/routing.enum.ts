@@ -8,4 +8,5 @@ export enum PanelRouting {
     IDEAS = '/ideas',
     STATISTICS = '/statistics',
     ADD_NEW_IDEA = '/new',
+    PENDING_IDEAS = '/pending',
 }

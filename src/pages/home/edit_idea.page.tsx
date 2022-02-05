@@ -14,7 +14,7 @@ const EditIdeaPage = () => {
     const dispatch = useDispatch();
 
     const handleSave = (form: IIdeaEditor) => {
-        if (currentIdea) dispatch(editIdea(currentIdea.id, form));
+        if (currentIdea) dispatch(editIdea(id, form));
     };
 
     if (!currentIdea) {

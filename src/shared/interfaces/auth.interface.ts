@@ -1,8 +1,4 @@
 export interface ILoginCredentials {
-    login: string;
+    email: string;
     password: string;
-}
-
-export interface IAuth {
-    token: string;
 }

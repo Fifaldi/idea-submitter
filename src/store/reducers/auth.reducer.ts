@@ -12,7 +12,7 @@ const initialState: IAuthState = {
 const AuthReducer = (state = initialState, action: IAction) => {
     switch (action.type) {
         case AuthActions.LOGIN_SUCCESS:
-            return {...state, token: action.data.token};
+            return {...state, token: action.data};
         case AuthActions.LOGOUT:
             return initialState;
         default:

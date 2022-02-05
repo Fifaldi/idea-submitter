@@ -7,6 +7,7 @@ import {Button} from 'primereact/button';
 import {useDispatch, useSelector} from 'react-redux';
 import {IAppState} from '@store/reducers';
 import {deleteIdea} from '@store/actions';
+import jwt_decode from 'jwt-decode';
 
 const MyIdeasPage = () => {
     const history = useHistory();
@@ -17,6 +18,8 @@ const MyIdeasPage = () => {
     const showDetails = (id: string) =>
         history.push(`${PanelRouting.ROOT}${PanelRouting.IDEAS}/${id}`);
     const {ideas} = useSelector((state: IAppState) => state.idea);
+    const {token} = useSelector((state: IAppState) => state.auth);
+    const decodedToken = jwt_decode(token) as any;
     return (
         <main className="container">
             <header className="home-header flex flex-row justify-content-between align-items-center">
@@ -30,7 +33,7 @@ const MyIdeasPage = () => {
             </header>
             <article className="home-ideas-list">
                 {ideas
-                    .filter((idea) => idea.author === 'Jan Kowalski')
+                    .filter((idea) => idea.author === decodedToken.email)
                     .map((idea, index) => (
                         <IdeaListElement
                             editable

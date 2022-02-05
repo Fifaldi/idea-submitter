@@ -7,6 +7,7 @@ import {
     IdeaDetailsPage,
     IdeasPage,
     MyIdeasPage,
+    PendingIdeasPage,
     StatisticsPage,
 } from '@pages/home';
 
@@ -34,6 +35,9 @@ const PanelRouter = () => {
             </Route>
             <Route exact path={`${path}${PanelRouting.MY_IDEAS}/:id`}>
                 <EditIdeaPage />
+            </Route>
+            <Route exact path={`${path}${PanelRouting.PENDING_IDEAS}`}>
+                <PendingIdeasPage />
             </Route>
         </Switch>
     );

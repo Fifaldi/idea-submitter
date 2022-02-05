@@ -11,6 +11,7 @@ export const IdeaActions = {
     EDIT_IDEAS_SUCCESS: '[Idea] Edit idea success',
     DELETE_IDEA: '[Idea] Delete idea',
     DELETE_IDEA_SUCCESS: '[Idea] Delete idea success',
+    CHANGE_IDEA_STATUS: '[Idea] Change idea status',
 };
 
 export const getIdeas = () => ({
@@ -29,10 +30,6 @@ export const createIdea = (data: IIdeaEditor) => ({
     type: IdeaActions.CREAT_IDEA,
     data,
 });
-export const createIdeaSuccess = (data: IIdea) => ({
-    type: IdeaActions.CREATE_IDEA_SUCCESS,
-    data,
-});
 
 export const editIdea = (id: string, editData: IIdeaEditor) => ({
     type: IdeaActions.EDIT_IDEA,
@@ -48,4 +45,9 @@ export const deleteIdea = (data: string) => ({
 });
 export const deleteIdeaSuccess = () => ({
     type: IdeaActions.DELETE_IDEA_SUCCESS,
+});
+
+export const changeIdeaStatus = (id: string, status: 'approved' | 'declined') => ({
+    type: IdeaActions.CHANGE_IDEA_STATUS,
+    data: {id, status},
 });

@@ -1,4 +1,5 @@
-import {IAuth, ILoginCredentials} from '@shared/interfaces';
+import {ILoginCredentials} from '@shared/interfaces';
+import {UserCredential} from 'firebase/auth';
 
 export const AuthActions = {
     LOGIN: '[Auth] Login',
@@ -11,7 +12,7 @@ export const loginAction = (data: ILoginCredentials) => ({
     data,
 });
 
-export const loginSuccess = (data: IAuth) => ({
+export const loginSuccess = (data: string) => ({
     type: AuthActions.LOGIN_SUCCESS,
     data,
 });

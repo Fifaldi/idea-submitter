@@ -4,7 +4,9 @@ import React, {useRef} from 'react';
 import {Card} from 'primereact/card';
 import './idea.style.scss';
 import {confirmDialog} from 'primereact/confirmdialog';
-
+import {useSelector} from 'react-redux';
+import {IAppState} from '@store/reducers';
+import jwt_decode from 'jwt-decode';
 interface IIdeaListElement {
     idea: IIdea;
     onPress: (id: string) => void;
@@ -19,6 +21,8 @@ const IdeaListElement: React.FC<IIdeaListElement> = ({
     editIdea,
     deleteIdea,
 }) => {
+    const {token} = useSelector((state: IAppState) => state.auth);
+    const decodedToken = jwt_decode(token) as any;
     const menuRef = useRef<Menu | null>(null);
     const menuItems = [
         {
@@ -55,11 +59,14 @@ const IdeaListElement: React.FC<IIdeaListElement> = ({
                 }}>
                 <div className="flex flex-row align-items-center justify-content-between">
                     <h4>{idea.title}</h4>
-                    {idea.author === 'Jan Kowalski' && <i className="pi pi-user"></i>}
+                    {idea.author === decodedToken.email && <i className="pi pi-user"></i>}
                 </div>
                 <div className="product-list-action">
                     <p>{idea.shortDescription}</p>
-                    <h6 className="mb-2">{idea.author}</h6>
+                    <div className="flex justify-content-between">
+                        <h6>{idea.author}</h6>
+                        {editable && <h6>{idea.status}</h6>}
+                    </div>
                 </div>
             </div>
 

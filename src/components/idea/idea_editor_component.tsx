@@ -5,13 +5,22 @@ import {IIdea, IIdeaEditor} from '@shared/interfaces';
 import {object, string} from 'yup';
 import {useFormik} from 'formik';
 import {Button} from 'primereact/button';
+import {useSelector} from 'react-redux';
+import {IAppState} from '@store/reducers';
+import jwt_decode from 'jwt-decode';
 interface IIdeaEditorPage {
     editedIdea?: IIdea;
     handleSave: (form: IIdeaEditor) => void;
 }
 const IdeaEditor: React.FC<IIdeaEditorPage> = ({editedIdea, handleSave}) => {
+    const {token} = useSelector((state: IAppState) => state.auth);
+    const decodedToken = jwt_decode(token) as any;
     const {values, setFieldValue, handleSubmit, errors, touched} = useFormik<IIdeaEditor>({
         initialValues: {
+            author: decodedToken?.email,
+            rating: editedIdea?.rating ?? 0,
+            status: 'pending',
+            userId: decodedToken.user_id,
             title: editedIdea?.title ?? '',
             shortDescription: editedIdea?.shortDescription ?? '',
             description: editedIdea?.description ?? '',

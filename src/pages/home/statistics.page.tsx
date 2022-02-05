@@ -2,7 +2,6 @@ import './homepage.styles.scss';
 import React, {useEffect, useState} from 'react';
 import {Dictionary, keys, values} from 'lodash';
 import {Chart} from 'primereact/chart';
-import {CountUp} from 'use-count-up';
 import {IAppState} from '@store/reducers';
 import {useSelector} from 'react-redux';
 
@@ -35,15 +34,7 @@ const StatisticsPage = () => {
             <header className="home-header">
                 <h1>Statystyki</h1>
             </header>
-            <CountUp isCounting end={ideas.length} duration={1} thousandsSeparator=",">
-                {(e: any) => (
-                    <div className=" flex number-of-ideas-container  justify-content-center align-items-center mb-5 ">
-                        <span className="number-of-ideas">
-                            {e.value} <span className="text-3xl ">zgłoszonych pomysłów!</span>
-                        </span>
-                    </div>
-                )}
-            </CountUp>
+
             <div className="chart-container">
                 <Chart type="doughnut" data={usersData} />
                 <Chart type="doughnut" data={usersData} />

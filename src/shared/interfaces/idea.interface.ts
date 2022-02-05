@@ -1,6 +1,7 @@
 import {IBaseModel} from './core.interface';
 
 export interface IIdea extends IBaseModel<string> {
+    rating: number;
     title: string;
     description: string;
     shortDescription: string;
@@ -8,4 +9,4 @@ export interface IIdea extends IBaseModel<string> {
     userId: string;
     status: 'approved' | 'declined' | 'pending';
 }
-export type IIdeaEditor = Omit<IIdea, 'author' | 'id' | 'userId' | 'status'>;
+export type IIdeaEditor = Omit<IIdea, 'id'>;
