@@ -1,3 +1,4 @@
+import {Timestamp} from 'firebase/firestore';
 import {IBaseModel} from './core.interface';
 
 export interface IIdea extends IBaseModel<string> {
@@ -8,5 +9,6 @@ export interface IIdea extends IBaseModel<string> {
     author: string;
     userId: string;
     status: 'approved' | 'declined' | 'pending';
+    timestamp: Timestamp;
 }
 export type IIdeaEditor = Omit<IIdea, 'id'>;

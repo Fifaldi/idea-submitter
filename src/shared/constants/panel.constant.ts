@@ -25,7 +25,7 @@ export const menuDefault = (navigation: History, isAdmin: boolean) => {
               },
               {
                   label: 'Oczrekujące pomysły',
-                  icon: 'pi pi-fw pi-chart-bar',
+                  icon: 'pi pi-fw pi-spinner',
                   command: () => {
                       navigation.push(`${PanelRouting.ROOT}${PanelRouting.PENDING_IDEAS}`);
                   },

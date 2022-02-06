@@ -6,6 +6,7 @@ import {IAppState} from '@store/reducers';
 import {isAdministrator} from '@store/selectors';
 import {Button} from 'primereact/button';
 import {changeIdeaStatus} from '../../store/actions/idea.actions';
+import {Timestamp, orderBy} from 'firebase/firestore';
 
 const IdeaDetailsPage = () => {
     const {id} = useParams<{id: string}>();

@@ -7,7 +7,6 @@ import {confirmDialog} from 'primereact/confirmdialog';
 import {useSelector} from 'react-redux';
 import {IAppState} from '@store/reducers';
 import jwt_decode from 'jwt-decode';
-import {isAdministrator} from '@store/selectors';
 interface IIdeaListElement {
     idea: IIdea;
     onPress: (id: string) => void;
@@ -22,7 +21,6 @@ const IdeaListElement: React.FC<IIdeaListElement> = ({
     editIdea,
     deleteIdea,
 }) => {
-    const isAdmin = useSelector(isAdministrator);
     const {token} = useSelector((state: IAppState) => state.auth);
     const decodedToken = jwt_decode(token) as any;
     const menuRef = useRef<Menu | null>(null);

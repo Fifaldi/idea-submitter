@@ -8,6 +8,7 @@ import {Button} from 'primereact/button';
 import {useSelector} from 'react-redux';
 import {IAppState} from '@store/reducers';
 import jwt_decode from 'jwt-decode';
+import {Timestamp} from 'firebase/firestore';
 interface IIdeaEditorPage {
     editedIdea?: IIdea;
     handleSave: (form: IIdeaEditor) => void;
@@ -24,6 +25,7 @@ const IdeaEditor: React.FC<IIdeaEditorPage> = ({editedIdea, handleSave}) => {
             title: editedIdea?.title ?? '',
             shortDescription: editedIdea?.shortDescription ?? '',
             description: editedIdea?.description ?? '',
+            timestamp: Timestamp.now(),
         },
         validationSchema: object().shape({
             title: string().required('*Pole wymagane'),
