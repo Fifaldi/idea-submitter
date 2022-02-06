@@ -3,7 +3,7 @@ import {Observable, switchMap, catchError} from 'rxjs';
 import {ofType} from 'redux-observable';
 import {getIdeasSuccess, go, handleError, IdeaActions} from '@store/actions';
 import {IdeaService} from '@shared/services';
-import {deleteIdeaSuccess, getIdeas, handleSucess} from '@store/actions';
+import {deleteIdeaSuccess, getIdeas, handleSuccess} from '@store/actions';
 import {PanelRouting} from '@shared/enums';
 const onGetIdeas$ = (actions$: Observable<IAction>) =>
     actions$.pipe(
@@ -22,7 +22,7 @@ const onCreateIdea$ = (actions$: Observable<IAction>) =>
         switchMap((action) =>
             IdeaService.createIdea(action.data).pipe(
                 switchMap(() => [
-                    handleSucess({
+                    handleSuccess({
                         title: 'Sukces',
                         message: 'Pomysł został dodany',
                     }),
@@ -39,7 +39,7 @@ const onEditIdea$ = (actions$: Observable<IAction>) =>
         switchMap((action) =>
             IdeaService.editIdea(action.data.id, action.data.editData).pipe(
                 switchMap(() => [
-                    handleSucess({
+                    handleSuccess({
                         title: 'Sukces',
                         message: 'Pomysł został zaktualizowany',
                     }),
@@ -57,7 +57,7 @@ const onDeleteIdea$ = (actions$: Observable<IAction>) =>
             IdeaService.deleteIdea(action.data).pipe(
                 switchMap(() => [
                     deleteIdeaSuccess(),
-                    handleSucess({
+                    handleSuccess({
                         title: 'Sukces',
                         message: 'Pomyślnie usunięto pomysł',
                     }),
@@ -74,7 +74,7 @@ const onChangeIdeaStatus$ = (actions$: Observable<IAction>) =>
         switchMap((action) =>
             IdeaService.changeIdeaStatus(action.data.id, action.data.status).pipe(
                 switchMap(() => [
-                    handleSucess({
+                    handleSuccess({
                         title: 'Sukces',
                         message: 'Pomysł został zaktualizowany',
                     }),

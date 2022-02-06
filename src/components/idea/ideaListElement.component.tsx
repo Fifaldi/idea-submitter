@@ -7,6 +7,7 @@ import {confirmDialog} from 'primereact/confirmdialog';
 import {useSelector} from 'react-redux';
 import {IAppState} from '@store/reducers';
 import jwt_decode from 'jwt-decode';
+import {isAdministrator} from '@store/selectors';
 interface IIdeaListElement {
     idea: IIdea;
     onPress: (id: string) => void;
@@ -21,9 +22,16 @@ const IdeaListElement: React.FC<IIdeaListElement> = ({
     editIdea,
     deleteIdea,
 }) => {
+    const isAdmin = useSelector(isAdministrator);
     const {token} = useSelector((state: IAppState) => state.auth);
     const decodedToken = jwt_decode(token) as any;
     const menuRef = useRef<Menu | null>(null);
+    const tooltipText =
+        idea.status === 'approved'
+            ? 'Pomysł zaakceptowany'
+            : idea.status === 'declined'
+            ? 'Pomysł odrzucony'
+            : 'Pomysł weryfikowany';
     const menuItems = [
         {
             label: 'Zobacz szczegóły',
@@ -41,7 +49,7 @@ const IdeaListElement: React.FC<IIdeaListElement> = ({
             command: () => {
                 confirmDialog({
                     message: 'Czy na pewno chcesz usunąć ten pomysł?',
-                    header: 'Potwirdzenie',
+                    header: 'Potwierdzenie',
                     icon: 'pi pi-exclamation-triangle',
                     acceptClassName: 'p-button-danger',
                     acceptLabel: 'Tak',
@@ -65,7 +73,20 @@ const IdeaListElement: React.FC<IIdeaListElement> = ({
                     <p>{idea.shortDescription}</p>
                     <div className="flex justify-content-between">
                         <h6>{idea.author}</h6>
-                        {editable && <h6>{idea.status}</h6>}
+                        {editable && (
+                            <div className="my-idea-status flex justify-content-center align-items-center">
+                                <h6
+                                    className={
+                                        idea.status === 'approved'
+                                            ? ' text-green-500'
+                                            : idea.status === 'declined'
+                                            ? 'text-pink-500  '
+                                            : ''
+                                    }>
+                                    {tooltipText}
+                                </h6>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

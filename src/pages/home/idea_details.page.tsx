@@ -41,7 +41,7 @@ const IdeaDetailsPage = () => {
                         </div>
                     )}
                 </div>
-                <h2>{idea.author}</h2>
+                <h4>{idea.author}</h4>
                 <p>{idea.description}</p>
             </div>
         </main>

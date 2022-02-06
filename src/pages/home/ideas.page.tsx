@@ -62,10 +62,9 @@ const IdeasPage = () => {
                 {ideas
                     .filter(
                         (idea) =>
-                            ((idea.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+                            (idea.title.toLowerCase().includes(searchValue.toLowerCase()) ||
                                 idea.author.toLowerCase().includes(searchValue.toLowerCase())) &&
-                                idea.status === 'approved') ||
-                            isAdmin,
+                            idea.status === 'approved',
                     )
                     .map((idea, index) => (
                         <IdeaListElement

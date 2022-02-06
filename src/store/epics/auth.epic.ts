@@ -3,7 +3,7 @@ import {catchError, Observable, switchMap} from 'rxjs';
 import {ofType} from 'redux-observable';
 import {AuthActions, loginSuccess} from '../actions/auth.actions';
 import AuthService from '../../shared/services/auth.service';
-import {handleError, handleSucess} from '../actions/core.actions';
+import {handleError, handleSuccess} from '../actions/core.actions';
 
 const onLogin$ = (actions$: Observable<IAction>) =>
     actions$.pipe(
@@ -23,7 +23,9 @@ const onLogout = (actions$: Observable<IAction>) =>
         ofType(AuthActions.LOGOUT),
         switchMap(() =>
             AuthService.logout().pipe(
-                switchMap(() => [handleSucess('Zostałeś wylogowany')]),
+                switchMap(() => [
+                    handleSuccess({title: 'Sukces', message: 'Wylogowano pomyślnie'}),
+                ]),
                 catchError((err) => [handleError(err)]),
             ),
         ),

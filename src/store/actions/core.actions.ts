@@ -21,7 +21,7 @@ export const handleError = (data: string | Record<string, any>) => ({
     data: data,
 });
 
-export const handleSucess = (data: string | Record<string, any>) => ({
+export const handleSuccess = (data: string | Record<string, any>) => ({
     type: CoreActions.HANDLE_SUCCESS,
     data: data,
 });

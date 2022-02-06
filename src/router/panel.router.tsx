@@ -10,6 +10,7 @@ import {
     PendingIdeasPage,
     StatisticsPage,
 } from '@pages/home';
+import {pageNotFound} from '@pages/common/not-found.page';
 
 const PanelRouter = () => {
     const {path} = useRouteMatch();
@@ -39,6 +40,7 @@ const PanelRouter = () => {
             <Route exact path={`${path}${PanelRouting.PENDING_IDEAS}`}>
                 <PendingIdeasPage />
             </Route>
+            {pageNotFound()}
         </Switch>
     );
 };
