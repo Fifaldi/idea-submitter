@@ -5,6 +5,8 @@ import {
     AddIdeaPage,
     EditIdeaPage,
     IdeaDetailsPage,
+    IdeasImplemented,
+    IdeasInProgress,
     IdeasPage,
     MyIdeasPage,
     PendingIdeasPage,
@@ -39,6 +41,12 @@ const PanelRouter = () => {
             </Route>
             <Route exact path={`${path}${PanelRouting.PENDING_IDEAS}`}>
                 <PendingIdeasPage />
+            </Route>
+            <Route exact path={`${path}${PanelRouting.IDEAS_IN_PROGRESS}`}>
+                <IdeasInProgress />
+            </Route>
+            <Route exact path={`${path}${PanelRouting.IDEAS_IMPLEMENTED}`}>
+                <IdeasImplemented />
             </Route>
             {pageNotFound()}
         </Switch>

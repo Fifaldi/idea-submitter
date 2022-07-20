@@ -1,17 +1,21 @@
-import {IIdea, IIdeaEditor} from '@shared/interfaces';
+import {IIdea, IIdeaEditor, IImplementationStatusType} from '@shared/interfaces';
 
 export const IdeaActions = {
     GET_IDEAS: '[Idea] Get ideas',
     GET_IDEAS_SUCCESS: '[Idea] Get ideas success',
     GET_IDEA_DETAILS: '[Idea] Get idea details',
     GET_IDEA_DETAILS_SUCCESS: '[Idea] Get idea details success',
-    CREAT_IDEA: '[Idea] Create idea ',
+    CREATE_IDEA: '[Idea] Create idea ',
     CREATE_IDEA_SUCCESS: '[Idea] Create idea success',
     EDIT_IDEA: '[Idea] Edit idea',
     EDIT_IDEAS_SUCCESS: '[Idea] Edit idea success',
     DELETE_IDEA: '[Idea] Delete idea',
     DELETE_IDEA_SUCCESS: '[Idea] Delete idea success',
     CHANGE_IDEA_STATUS: '[Idea] Change idea status',
+    RATE_IDEA: '[Idea] Rate idea',
+    RATE_IDEA_SUCCESS: '[Idea] Rate idea success',
+    CHANGE_IDEA_IMPLEMENTATION_STATUS: '[Idea] Change idea implementation status',
+    CHANGE_IDEA_IMPLEMENTATION_STATUS_SUCCESS: '[Idea] Change idea implementation status success',
 };
 
 export const getIdeas = () => ({
@@ -27,7 +31,7 @@ export const getIdeaDetails = (data: string) => ({
     data,
 });
 export const createIdea = (data: IIdeaEditor) => ({
-    type: IdeaActions.CREAT_IDEA,
+    type: IdeaActions.CREATE_IDEA,
     data,
 });
 
@@ -50,4 +54,29 @@ export const deleteIdeaSuccess = () => ({
 export const changeIdeaStatus = (id: string, status: 'approved' | 'declined') => ({
     type: IdeaActions.CHANGE_IDEA_STATUS,
     data: {id, status},
+});
+
+export const rateIdea = (data: {
+    id: string;
+    rating: number;
+    userId: string;
+    currentRating: number;
+    currentReviewers: string[];
+}) => ({
+    type: IdeaActions.RATE_IDEA,
+    data,
+});
+export const rateIdeaSuccess = () => ({
+    type: IdeaActions.RATE_IDEA_SUCCESS,
+});
+
+export const changeIdeaImplementationStatus = (data: {
+    id: string;
+    implementation_status: IImplementationStatusType;
+}) => ({
+    type: IdeaActions.CHANGE_IDEA_IMPLEMENTATION_STATUS,
+    data,
+});
+export const changeIdeaImplementationStatusSuccess = () => ({
+    type: IdeaActions.CHANGE_IDEA_IMPLEMENTATION_STATUS_SUCCESS,
 });

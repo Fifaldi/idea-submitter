@@ -6,3 +6,5 @@ export {default as StatisticsPage} from './statistics.page';
 export {default as AddIdeaPage} from './add_idea.page';
 export {default as EditIdeaPage} from './edit_idea.page';
 export {default as PendingIdeasPage} from './pendingIdeas.page';
+export {default as IdeasInProgress} from './ideas_in_progress.page';
+export {default as IdeasImplemented} from './ideas_implemented.page';

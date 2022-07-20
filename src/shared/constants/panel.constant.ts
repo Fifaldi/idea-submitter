@@ -9,6 +9,21 @@ export const menuDefault = (navigation: History, isAdmin: boolean) => {
                   icon: 'pi pi-fw pi-list',
                   command: () => navigation.push(`${PanelRouting.ROOT}${PanelRouting.IDEAS}`),
               },
+
+              {
+                  label: 'Pomysły realizowane',
+                  icon: 'pi pi-fw pi-play',
+                  command: () => {
+                      navigation.push(`${PanelRouting.ROOT}${PanelRouting.IDEAS_IN_PROGRESS}`);
+                  },
+              },
+              {
+                  label: 'Pomysły zrealizowane',
+                  icon: 'pi pi-fw pi-check-square',
+                  command: () => {
+                      navigation.push(`${PanelRouting.ROOT}${PanelRouting.IDEAS_IMPLEMENTED}`);
+                  },
+              },
               {
                   label: 'Moje Pomysły',
                   icon: 'pi pi-fw pi-plus',
@@ -22,6 +37,20 @@ export const menuDefault = (navigation: History, isAdmin: boolean) => {
                   label: 'Przegląd pomysłów ',
                   icon: 'pi pi-fw pi-list',
                   command: () => navigation.push(`${PanelRouting.ROOT}${PanelRouting.IDEAS}`),
+              },
+              {
+                  label: 'Pomysły realizowane',
+                  icon: 'pi pi-fw pi-play',
+                  command: () => {
+                      navigation.push(`${PanelRouting.ROOT}${PanelRouting.IDEAS_IN_PROGRESS}`);
+                  },
+              },
+              {
+                  label: 'Pomysły zrealizowane',
+                  icon: 'pi pi-fw pi-check-square',
+                  command: () => {
+                      navigation.push(`${PanelRouting.ROOT}${PanelRouting.IDEAS_IMPLEMENTED}`);
+                  },
               },
               {
                   label: 'Oczrekujące pomysły',

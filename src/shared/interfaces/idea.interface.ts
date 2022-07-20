@@ -10,5 +10,8 @@ export interface IIdea extends IBaseModel<string> {
     userId: string;
     status: 'approved' | 'declined' | 'pending';
     timestamp: Timestamp;
+    reviewers: string[];
+    implementation_status: IImplementationStatusType;
 }
 export type IIdeaEditor = Omit<IIdea, 'id'>;
+export type IImplementationStatusType = 'not_implemented' | 'in_progress' | 'implemented';
