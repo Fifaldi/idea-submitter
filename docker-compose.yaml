@@ -1,7 +1,12 @@
 version: '3.9'
-
 services:
   app:
     build:
-      context: docker/workspace
+      context: docker/app
       dockerfile: Dockerfile
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    volumes:
+      - ./src/:/usr/local/app/src/
+
+#https://michalwojcik.com.pl/2020/05/24/node_modules-in-bind-mounts-with-docker/
