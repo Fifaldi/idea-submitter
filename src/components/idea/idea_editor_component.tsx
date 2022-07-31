@@ -26,6 +26,8 @@ const IdeaEditor: React.FC<IIdeaEditorPage> = ({editedIdea, handleSave}) => {
             shortDescription: editedIdea?.shortDescription ?? '',
             description: editedIdea?.description ?? '',
             timestamp: Timestamp.now(),
+            reviewers: editedIdea?.reviewers ?? [],
+            implementation_status: 'not_implemented',
         },
         validationSchema: object().shape({
             title: string().required('*Pole wymagane'),

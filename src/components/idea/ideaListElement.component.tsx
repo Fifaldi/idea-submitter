@@ -7,6 +7,8 @@ import {confirmDialog} from 'primereact/confirmdialog';
 import {useSelector} from 'react-redux';
 import {IAppState} from '@store/reducers';
 import jwt_decode from 'jwt-decode';
+import {Rating} from 'primereact/rating';
+import {createImmediatelyInvokedArrowFunction} from 'typescript';
 interface IIdeaListElement {
     idea: IIdea;
     onPress: (id: string) => void;
@@ -30,12 +32,13 @@ const IdeaListElement: React.FC<IIdeaListElement> = ({
             : idea.status === 'declined'
             ? 'Pomysł odrzucony'
             : 'Pomysł weryfikowany';
-    const menuItems = [
-        {
-            label: 'Zobacz szczegóły',
-            icon: 'pi pi-search',
-            command: () => onPress(idea.id),
-        },
+    const menuItemsBase = {
+        label: 'Zobacz szczegóły',
+        icon: 'pi pi-search',
+        command: () => onPress(idea.id),
+    };
+    const menuItemsFull = [
+        menuItemsBase,
         {
             label: 'Edytuj',
             icon: 'pi pi-pencil',
@@ -57,6 +60,7 @@ const IdeaListElement: React.FC<IIdeaListElement> = ({
             },
         },
     ];
+
     return (
         <Card className="product-item">
             <div
@@ -86,10 +90,22 @@ const IdeaListElement: React.FC<IIdeaListElement> = ({
                             </div>
                         )}
                     </div>
+                    {!!idea.rating && (
+                        <div className="w-5 flex align-items-center">
+                            <p className="mr-1">({idea.reviewers.length})</p>
+
+                            <Rating value={idea.rating} readOnly stars={5} cancel={false} />
+                        </div>
+                    )}
                 </div>
             </div>
 
-            <Menu model={menuItems} popup ref={menuRef} id="popup_menu" />
+            <Menu
+                model={idea.status === 'approved' ? [menuItemsBase] : menuItemsFull}
+                popup
+                ref={menuRef}
+                id="popup_menu"
+            />
         </Card>
     );
 };

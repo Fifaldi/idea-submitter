@@ -1,4 +1,4 @@
-import {IIdeaEditor} from '@shared/interfaces';
+import {IIdeaEditor, IImplementationStatusType} from '@shared/interfaces';
 import {from} from 'rxjs';
 import {addDoc, collection, deleteDoc, doc, getDocs, updateDoc} from 'firebase/firestore';
 import {database} from '@core/firebase.config';
@@ -33,5 +33,42 @@ export default class IdeaService {
     static changeIdeaStatus(id: string, status: 'approved' | 'declined') {
         const ideaDoc = doc(database, 'ideas', id);
         return from((async () => await updateDoc(ideaDoc, {status}))());
+    }
+    static rateIdea({
+        id,
+        rating,
+        userId,
+        currentRating,
+        currentReviewers,
+    }: {
+        id: string;
+        rating: number;
+        userId: string;
+        currentRating: number;
+        currentReviewers: string[];
+    }) {
+        const ideaDoc = doc(database, 'ideas', id);
+        return from(
+            (async () =>
+                await updateDoc(ideaDoc, {
+                    rating: (currentRating + rating) / (currentReviewers.length > 1 ? 2 : 1),
+                    reviewers: [...currentReviewers, userId],
+                }))(),
+        );
+    }
+    static changeIdeaImplementationStatus({
+        id,
+        implementation_status,
+    }: {
+        id: string;
+        implementation_status: IImplementationStatusType;
+    }) {
+        const ideaDoc = doc(database, 'ideas', id);
+        return from(
+            (async () =>
+                await updateDoc(ideaDoc, {
+                    implementation_status,
+                }))(),
+        );
     }
 }

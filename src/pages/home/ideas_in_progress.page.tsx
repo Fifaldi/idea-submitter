@@ -5,21 +5,19 @@ import IdeaListElement from '@components/idea/ideaListElement.component';
 import {useSelector} from 'react-redux';
 import {IAppState} from '@store/reducers';
 import {Skeleton} from 'primereact/skeleton';
-import {CountUp} from 'use-count-up';
 import {InputText} from 'primereact/inputtext';
-import {isAdministrator} from '@store/selectors';
-const IdeasPage = () => {
+import {PanelRouting} from '@shared/enums';
+const IdeaInProgressPage = () => {
     const history = useHistory();
-    const location = useLocation();
-    const handleIdeaClick = (id: string) => history.push(`${location.pathname}/${id}`);
+    const handleIdeaClick = (id: string) =>
+        history.push(`${PanelRouting.ROOT}${PanelRouting.IDEAS}/${id}`);
     const {ideas} = useSelector((state: IAppState) => state.idea);
     const [searchValue, setSearchValue] = useState('');
-    const isAdmin = useSelector(isAdministrator);
     if (!ideas.length) {
         return (
             <main className="container">
                 <header className="home-header">
-                    <h1>Lista pomysłów</h1>
+                    <h1>Lista pomysłów w trakcie realizacji</h1>
                 </header>
                 <article className="home-ideas-list">
                     <Skeleton className="skeleton-item" height="13rem"></Skeleton>
@@ -32,26 +30,7 @@ const IdeasPage = () => {
     return (
         <main className="container">
             <header className="home-header flex align-items-center">
-                <h1>Lista pomysłów: </h1>
-                <CountUp
-                    isCounting
-                    end={
-                        ideas.filter(
-                            (idea) =>
-                                idea.status === 'approved' &&
-                                idea.implementation_status === 'not_implemented',
-                        ).length
-                    }
-                    duration={1}
-                    thousandsSeparator=",">
-                    {(e: any) => (
-                        <div className="number-of-ideas-container">
-                            <span className="number-of-ideas">
-                                {e.value} zgłoszonych nowych pomysłów!
-                            </span>
-                        </div>
-                    )}
-                </CountUp>
+                <h1>Lista pomysłów w trakcie realizacji: </h1>
             </header>
 
             <div className="flex justify-content-center">
@@ -72,8 +51,7 @@ const IdeasPage = () => {
                         (idea) =>
                             (idea.title.toLowerCase().includes(searchValue.toLowerCase()) ||
                                 idea.author.toLowerCase().includes(searchValue.toLowerCase())) &&
-                            idea.status === 'approved' &&
-                            idea.implementation_status === 'not_implemented',
+                            idea.implementation_status === 'in_progress',
                     )
                     .map((idea, index) => (
                         <IdeaListElement
@@ -87,4 +65,4 @@ const IdeasPage = () => {
     );
 };
 
-export default IdeasPage;
+export default IdeaInProgressPage;
