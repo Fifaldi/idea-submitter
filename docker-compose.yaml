@@ -1,12 +1,10 @@
 version: '3.9'
 services:
   app:
-    build:
-      context: docker/app
-      dockerfile: Dockerfile
-    extra_hosts:
-      - 'host.docker.internal:host-gateway'
+    build: .
+    command: yarn start
+    ports:
+      - "3000:3000"
     volumes:
-      - ./src/:/usr/local/app/src/
-
-#https://michalwojcik.com.pl/2020/05/24/node_modules-in-bind-mounts-with-docker/
+      - .:/usr/app/
+      - /usr/app/node_modules
